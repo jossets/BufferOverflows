@@ -47,7 +47,18 @@ jobs:
         
       - name: Zip
         run: cd stringformats && zip vuln.zip vuln
-        
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          
       - name: Upload linux artifact
         uses: actions/upload-release-asset@v1
         env:
@@ -56,4 +67,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./stringformats/vuln.zip
           asset_name: vuln.zip
-          asset_content_type: application/gzip
+          asset_content_type: application/zip
