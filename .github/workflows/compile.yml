@@ -35,7 +35,6 @@ jobs:
             target: Windows
 
     steps:
-      - name Install gcc 
       
       - name: Checkout Repository
         uses: actions/checkout@v2
