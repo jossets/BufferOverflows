@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install gcc for 32 bits
-        run: apt update && apt-get install gcc-multilib g++-multilib
+        run: sudo apt install -y gcc-multilib g++-multilib
         
       - name: Compile a release build 
         run: cd stringformats && make
