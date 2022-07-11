@@ -35,14 +35,16 @@ jobs:
             target: Windows
 
     steps:
+      - name Install gcc 
+      
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Compile a release build 
-        run: make
+        run: cd stringformats && make
         
       - name: Zip
-        run: zip vuln.zip vuln
+        run: cd stringformats && zip vuln.zip vuln
         
       - name: Upload linux artifact
         uses: actions/upload-release-asset@v1
@@ -50,6 +52,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./vuln.zip
+          asset_path: ./stringformats/vuln.zip
           asset_name: vuln.zip
           asset_content_type: application/gzip
